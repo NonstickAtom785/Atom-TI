@@ -1,0 +1,59 @@
+UpdLCD:
+  push af
+  push bc
+  push de
+  push hl
+  ld hl,plotSScreen
+  ld a,$80
+  out (16),a
+  ld de,11
+  ld a,$20
+  ex (sp),hl
+  ex (sp),hl
+col:
+  out ($10),a
+  ld b,(hl)
+  xor b
+  xor b
+  ld bc,$8011
+  nop
+row:
+  sbc hl,de
+  add hl,de
+  outi
+  add hl,de
+  djnz row
+  inc a
+  dec h
+  dec h
+  dec h
+  inc hl
+  cp $2C
+  jr nz,col
+  jr pop
+  
+clrBuf:
+  DI
+  push af
+  push bc
+  push de
+  push hl
+  ld hl,0
+  add hl,sp
+  ls sp,plotSScreen+768
+  ld de,0
+  ld b,48
+_:
+  push de \ push de
+  push de \ push de
+  push de \ push de
+  push de \ push de
+  djnz _-
+  ld sp,hl
+  ei
+pop:
+  pop hl
+  pop de
+  pop bc
+  pop af
+  ret
