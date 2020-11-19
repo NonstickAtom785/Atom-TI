@@ -1,0 +1,25 @@
+; Inputs:
+;   H is X
+;   L is Y
+; Output:
+;   Buffer at the offset of X and Y
+;   z is set if character is on the left.
+
+getPixel:
+  ld a,h
+  ld h,0
+  ld b,h
+  ld c,l
+  add hl,hl
+  add hl,bc
+  add hl,hl
+  add hl,hl
+  add a,a
+  add a,a
+  ld c,a
+  srl c \ srl c \ srl c
+  add hl,bc
+  ld bc,plotSScreen
+  add hl,bc
+  and 7
+  ret
