@@ -1,0 +1,19 @@
+; Input:
+;   A = Character
+;   
+; Output:
+;   DE points to the index into the font
+
+getIndex:
+  push hl
+  ld h,0
+  ld l,a
+  ld d,h
+  ld e,l
+  add hl,hl
+  add hl,de
+  ld de,_font
+  add hl,de
+  ex de,hl
+  pop hl
+  ret
