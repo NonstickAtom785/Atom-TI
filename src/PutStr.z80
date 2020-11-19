@@ -1,0 +1,20 @@
+; Inputs:
+;   Coordinates in HL
+;   String at DE
+
+PutStr:
+  push de
+  push hl
+  ld a,(de)
+  call PutFC
+  pop hl
+  inc h
+  ld a,h
+  cp 24
+  pop de
+  ret z
+  inc de
+  ld a,(de)
+  and a
+  jr nz,PutStr
+  ret
