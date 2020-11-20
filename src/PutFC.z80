@@ -16,6 +16,7 @@ PutFC:
 right:
   ld a,(de)
   call put
+left:
   ld a,c
   cp $0f
   ld a,(de)
@@ -25,7 +26,7 @@ right:
   ret
 _:
   call shiftPut
-  djnz Left
+  djnz left
   ret
 shiftPut:
   rlca \ rlca \ rlca \ rlca
