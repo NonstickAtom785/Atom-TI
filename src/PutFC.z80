@@ -15,8 +15,10 @@ PutFC:
   ld c,$0f
 right:
   ld a,(de)
-  call put
+  call shiftPut
 left:
+  ld a,(de)
+  call Put
   ld a,c
   cp $0f
   ld a,(de)
